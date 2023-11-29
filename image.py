@@ -1,25 +1,40 @@
 import cv2
 import numpy as np
+from PIL import Image, ImageFont, ImageDraw
 
 from globals import *
 
-def create_map_image(land, facility):
-    with open(f"log/owner.json") as f:
+def create_map_image(land, dir, pick="all"):
+    with open(f"log/{dir}/map.json") as f:
+        facility = json.load(f)
+    with open(f"log/{dir}/owner.json") as f:
         owner = json.load(f)
-    with open(f"log/player.json") as f:
+    with open(f"log/{dir}/player.json") as f:
         player = json.load(f)
     img = np.zeros((H*size, W*size, 3))
+    mx = max(list(map(lambda x: max(x), land)))
     for h in range(1, H):
         for w in range(1, W):
-            color = (max(0, 200-land[h][w]), 255, max(0, 200-land[h][w]))
+            if pick == "all":
+                color = (max(0, 200-land[h][w]), 255, max(0, 200-land[h][w]))
+            else:
+                color = (255-255*land[h][w]//mx, 255, 255-255*land[h][w]//mx)
             for i in range(size):
                 for j in range(size):
                     img[h*size+i][w*size+j] = color
+
+    font_path = 'C:\Windows\Fonts\meiryo.ttc'
+    font_size = 12
+    font = ImageFont.truetype(font_path, font_size)
+    img = Image.fromarray((img).astype(np.uint8))
+    draw = ImageDraw.Draw(img)
     for h in range(1, H):
         for w in range(1, W):
             if owner[h][w] != "":
-                cv2.putText(img, f"{facility[h][w]}", (size*w+2, size*(h+1)-2), cv2.FONT_HERSHEY_DUPLEX, 0.5, player[owner[h][w]]["color"])
+                draw.text((size*w+2, size*h), f"{facility[h][w]}", font=font, fill=tuple(player[owner[h][w]]["color"]))
+                # cv2.putText(img, f"{facility[h][w]}", (size*w+2, size*(h+1)-2), cv2.FONT_HERSHEY_DUPLEX, 0.5, player[owner[h][w]]["color"])
 
+    img = np.array(img)
     for h in range(1, H):
         cv2.putText(img, f"{h}", (0, size*(h+1)), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255))
     for w in range(1, W):
