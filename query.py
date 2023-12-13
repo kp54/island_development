@@ -31,6 +31,8 @@ def add_query(message_list, name, dir):
 
     if name in author:
         del query[author[name]]
+    if fac == '-':
+        fac = ''
     query[h*W+w] = fac
     author[name] = str(h*W+w)
     with open(f"log/query.json", 'w') as f:
@@ -56,7 +58,10 @@ def exec_query(dir):
         w = coord %  W
         fac = query[author[p]]
         facility[h][w] = fac
-        owner[h][w] = p
+        if fac == '':
+            owner[h][w] = ''
+        else:
+            owner[h][w] = p
         player[p]["money"] -= facility_dict[fac]["cost"]
 
     query.clear()
