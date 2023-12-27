@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 import matplotlib.colors as mcolors
 
 size = 20
-H = 40
-W = 60
+H = 30
+W = 40
 
 load_dotenv()
 intents = discord.Intents.default()

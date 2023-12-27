@@ -19,9 +19,7 @@ def create_map_image(land, dir, pick="all"):
                 color = (max(0, 200-land[h][w]), 255, max(0, 200-land[h][w]))
             else:
                 color = (255-255*land[h][w]//mx, 255, 255-255*land[h][w]//mx)
-            for i in range(size):
-                for j in range(size):
-                    img[h*size+i][w*size+j] = color
+            img[h*size:(h+1)*size, w*size:(w+1)*size] = color
 
     font_path = 'C:\Windows\Fonts\meiryo.ttc'
     font_size = 12
@@ -32,7 +30,6 @@ def create_map_image(land, dir, pick="all"):
         for w in range(1, W):
             if owner[h][w] != "":
                 draw.text((size*w+2, size*h), f"{facility[h][w]}", font=font, fill=tuple(player[owner[h][w]]["color"]))
-                # cv2.putText(img, f"{facility[h][w]}", (size*w+2, size*(h+1)-2), cv2.FONT_HERSHEY_DUPLEX, 0.5, player[owner[h][w]]["color"])
 
     img = np.array(img)
     for h in range(1, H):
