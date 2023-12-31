@@ -93,7 +93,7 @@ def add_player(name, color_name, dir):
             json.dump(player, f)
         return "色を変更しました"
     else:
-        player[name] = {"color": color_gbr, "money": 10000}
+        player[name] = {"color": color_gbr, "money": 10000, "income": 0}
         with open(f"log/{dir}/player.json", 'w') as f:
             json.dump(player, f)
         return "プレイヤーとして追加しました"
