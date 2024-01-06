@@ -57,6 +57,12 @@ facility_dict = {
     'Z': {"name": "動物園", "label": "entertainment", "cost": 1000000, "range": 10, "income": 50, "price": 10},
     '遊': {"name": "遊園地", "label": "entertainment", "cost": 1000000, "range": 10, "income": 50, "price": 10},
     'D': {"name": "ディズニーランド", "label": "entertainment", "cost": 10000000, "range": 20, "income": 100, "price": 50},
+    '寺': {"name": "寺", "label": "temple", "cost": 5000, "range": 5, "income": 15, "price": 1},
+    '仏': {"name": "仏閣", "label": "temple", "cost": 70000, "range": 5, "income": 30, "price": 5},
+    '金': {"name": "金閣寺", "label": "temple", "cost": 800000, "range": 8, "income": 50, "price": 10},
+    'X': {"name": "スフィンクス", "label": "temple", "cost": 2000000, "range": 10, "income": 70, "price": 20},
+    '松': {"name": "松屋", "label": "restaurant", "cost": 3000, "range": 3, "income": 15, "price": 1},
+    'サ': {"name": "サイゼリヤ", "label": "restaurant", "cost": 3000, "range": 3, "income": 15, "price": 1},
     'M': {"name": "記念碑", "label": "monument", "cost": 30000000, "range": 10, "income": 10, "price": 30},
 }
 
