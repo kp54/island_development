@@ -38,7 +38,10 @@ def add_query(message_list, name, dir):
     with open(f"log/query.json", 'w') as f:
         json.dump((query, author), f)
     if name == owner[h][w]:
-        return "行動を予約しました（建設済みの施設を上書きします）"
+        with open(f"log/{dir}/map.json") as f:
+            facility = json.load(f)
+            current = facility[h][w]
+        return f"行動を予約しました（建設済みの施設 `{facility_dict[current]['name']}` を上書きします）"
     return "行動を予約しました"
 
 
