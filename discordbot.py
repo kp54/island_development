@@ -1,6 +1,9 @@
 import asyncio
+import os
 import shutil
+
 from discord.ext import tasks
+
 from globals import *
 from query import *
 from image import *
@@ -11,6 +14,9 @@ from solver import *
 @client.event
 async def on_ready():
     print("Welcome to 孤島開発")
+
+    # ループ処理
+    time_check.start()
 
 
 # 1時間ごとに実行される処理
@@ -86,7 +92,11 @@ async def on_message(message):
             await message.channel.send(file=discord.File(create_map_image(price, dir, pick=message.content.split()[1])))
 
 
-# ループ処理
-time_check.start()
+if not os.path.exists('log'):
+    os.mkdir('log')
+
+if not os.path.exists('log/save.json'):
+    initialize_field_data()
+
 # botの接続と起動
 client.run(TOKEN)

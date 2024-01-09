@@ -11,6 +11,7 @@ W = 40
 
 load_dotenv()
 intents = discord.Intents.default()
+intents.message_content = True # message.content に必要
 intents.members = True # get_member に必要
 client = discord.Client(intents=intents) # 接続に使用するオブジェクト
 TOKEN = os.getenv('TOKEN')

@@ -21,7 +21,7 @@ def create_map_image(land, dir, pick="all"):
                 color = (255-255*land[h][w]//mx, 255, 255-255*land[h][w]//mx)
             img[h*size:(h+1)*size, w*size:(w+1)*size] = color
 
-    font_path = 'C:\Windows\Fonts\meiryo.ttc'
+    font_path = '/usr/share/fonts/noto-cjk/NotoSansCJK-Regular.ttc'
     font_size = 12
     font = ImageFont.truetype(font_path, font_size)
     img = Image.fromarray((img).astype(np.uint8))
